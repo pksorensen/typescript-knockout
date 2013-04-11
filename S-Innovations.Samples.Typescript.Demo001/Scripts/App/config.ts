@@ -4,8 +4,8 @@
 require.config({
     baseUrl: '/Scripts/App/',
     paths: {
-        'jQuery': '/scripts/jquery-1.9.1',
-        'knockout': '/scripts/knockout-2.2.1',
+        'jQuery': '/Scripts/jquery-1.9.1',
+        'knockout': '/Scripts/knockout-2.2.1.debug',
         'AppViewModel': '/Scripts/ViewModels/AppViewModel',
     },
     urlArgs: "bust=" + (new Date()).getTime(),
@@ -24,8 +24,8 @@ require.config({
 // load AMD module main.ts (compiled to main.js)
 // and include shims $, _, Backbone
 
-require(['AppViewModel'], (avm) => {
-
+require(['knockout','AppViewModel'], (koo,avm) => {
+    (<any>window).ko = koo;
     var viewmodel = new avm.AppViewModel();
     ko.applyBindings(viewmodel);
     alert('hello world - SUCCESS');
